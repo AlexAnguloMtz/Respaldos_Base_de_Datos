@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  --primary: rgb(210, 103, 36);
+  --onPrimary: white;
+  --surface: white;
+}
+
+button {
+  cursor: pointer;
+}

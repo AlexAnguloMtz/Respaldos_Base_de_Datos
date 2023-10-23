@@ -1,0 +1,13 @@
+.drawer {
+  background-color: var(--surface);
+  position: fixed;
+  left: 0;
+  width: 70%;
+  height: 100vh;
+  transition: transform 250ms ease;
+  transform: translateX(-100%);
+}
+
+.drawer.active {
+  transform: translateX(0);
+}
