@@ -11,3 +11,14 @@
 .drawer.active {
   transform: translateX(0);
 }
+
+.closeButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px;
+}
+
+.closeButton {
+  display: grid;
+  place-items: center;
+}
