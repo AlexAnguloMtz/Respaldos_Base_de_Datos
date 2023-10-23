@@ -1,6 +1,6 @@
 .nav {
+  height: var(--navHeight);
   background-color: var(--primary);
-  height: 50px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

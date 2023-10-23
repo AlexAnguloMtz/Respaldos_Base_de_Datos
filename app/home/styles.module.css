@@ -1,1 +1,7 @@
 .page {}
+
+.loadingScreen {
+  height: calc(100vh - var(--navHeight));
+  display: grid;
+  place-items: center;
+}

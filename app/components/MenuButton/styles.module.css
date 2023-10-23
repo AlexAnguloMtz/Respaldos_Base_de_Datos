@@ -12,7 +12,7 @@
 
 .line {
   background-color: var(--onPrimary);
-  width: 80%;
+  width: 70%;
   height: 4px;
   border-radius: 6px;
 }

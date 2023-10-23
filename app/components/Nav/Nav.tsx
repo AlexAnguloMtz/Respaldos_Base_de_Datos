@@ -1,6 +1,6 @@
 'use client';
 
-import MenuButton from '@/app/MenuButton';
+import MenuButton from '@/app/components/MenuButton';
 import styles from './styles.module.css';
 import { ReactNode, useState } from "react";
 import { Drawer } from '../Drawer/Drawer';

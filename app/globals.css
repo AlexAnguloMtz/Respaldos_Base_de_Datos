@@ -5,9 +5,14 @@
 }
 
 * {
-  --primary: rgb(210, 103, 36);
+  --primary: #ff3d00;
   --onPrimary: white;
   --surface: white;
+  --highlight: rgb(31, 162, 189);
+}
+
+* {
+  --navHeight: 50px;
 }
 
 button {
