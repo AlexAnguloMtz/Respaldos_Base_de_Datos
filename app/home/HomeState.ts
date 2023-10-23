@@ -1,11 +1,13 @@
+import { HomeData } from "./HomeData"
+
 export type HomeState = {
   loading: boolean,
+  data?: HomeData,
   error?: Error
 }
 
-export const homeInitialState = (): HomeState => {
+export const initialHomeState = (): HomeState => {
   return {
     loading: true,
-    error: undefined
   }
 }

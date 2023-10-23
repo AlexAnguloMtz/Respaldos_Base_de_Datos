@@ -4,7 +4,7 @@
   left: 0;
   width: 70%;
   height: 100vh;
-  transition: transform 250ms ease;
+  transition: transform 200ms ease;
   transform: translateX(-100%);
 }
 

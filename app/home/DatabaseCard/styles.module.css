@@ -1,0 +1,18 @@
+.upperRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.primaryAction {
+  background-color: var(--highlight);
+  padding: 12px 0;
+  margin-top: 16px;
+  border-radius: 8px;
+  color: var(--onHighlight);
+  transition: background-color 250ms ease;
+}
+
+.primaryAction:hover {
+  background-color: var(--highlightMid);
+}

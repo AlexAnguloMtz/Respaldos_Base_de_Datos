@@ -1,6 +1,8 @@
+import { HomeData } from "./HomeData";
 import { HomeState } from "./HomeState";
 
 type HomeStateAction =
+  | { type: 'set_data', value: HomeData }
   | { type: 'set_loading', value: boolean }
   | { type: 'set_error', value: Error }
 
@@ -8,6 +10,8 @@ export const homeReducer = (state: HomeState, action: HomeStateAction): HomeStat
   switch (action.type) {
     case 'set_loading':
       return { ...state, loading: action.value }
+    case 'set_data':
+      return { ...state, loading: false, data: action.value }
     case 'set_error':
       return { ...state, loading: false, error: action.value }
     default:

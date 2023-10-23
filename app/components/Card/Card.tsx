@@ -2,12 +2,13 @@ import styles from './styles.module.css';
 import { ReactNode } from "react";
 
 type Props = {
-  children: ReactNode
+  className?: string,
+  children: ReactNode,
 }
 
-export const Card = ({ children }: Props): ReactNode => {
+export const Card = ({ className, children }: Props): ReactNode => {
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`}>
       {children}
     </div>
   );

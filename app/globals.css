@@ -8,15 +8,44 @@
   --primary: #ff3d00;
   --onPrimary: white;
   --surface: white;
+  --onSurfaceDark: rgb(78, 79, 79);
+  --onSurfaceMid: rgb(118, 119, 119);
   --highlight: rgb(31, 162, 189);
+  --highlightMid: rgb(15, 101, 118);
+  --onHighlight: white;
+  --card: white;
 }
 
 * {
   --navHeight: 50px;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--onSurfaceDark);
+}
+
+p {
+  color: var(--onSurfaceMid);
+}
+
+a {
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+
 button {
   cursor: pointer;
   background-color: transparent;
   border: none;
+}
+
+.centered {
+  display: grid;
+  place-items: center;
 }

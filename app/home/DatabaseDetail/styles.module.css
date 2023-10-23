@@ -1,0 +1,18 @@
+.databaseDetail {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.name {
+  width: 70px;
+}
+
+.value {
+  flex: 1;
+}
+
+.name,
+.value {
+  font-size: 15px;
+}
