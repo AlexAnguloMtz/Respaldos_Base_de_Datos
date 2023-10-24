@@ -31,6 +31,9 @@ export default function Home(): ReactNode {
   }
 
   const body = (): ReactNode => {
+    if (state.loading) {
+      return <></>
+    }
     if (state.error) {
       return <h1>Error inesperado...</h1>
     }

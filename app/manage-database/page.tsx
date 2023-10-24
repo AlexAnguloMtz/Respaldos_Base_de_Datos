@@ -8,6 +8,7 @@ import { reducer } from './reducer';
 import { initialState } from './ManageDatabaseState';
 import { ManageDatabaseService } from './ManageDatabaseService';
 import Card from '../components/Card';
+import { DatabaseDetails } from '../models/DatabaseDetails';
 
 const dataService: ManageDatabaseService = new ManageDatabaseService();
 
@@ -30,10 +31,13 @@ export default function ManageDatabase(): JSX.Element {
   }
 
   const body = (): ReactNode => {
+    if (state.loading) {
+      return <></>
+    }
     if (state.error) {
       return <h1>Error inesperado...</h1>
     }
-    return <Content />
+    return <Content model={state.data?.database!} />
   }
 
   return (
@@ -43,11 +47,14 @@ export default function ManageDatabase(): JSX.Element {
   );
 }
 
-const Content = (): ReactNode => {
+const Content = ({ model }: { model: DatabaseDetails }): ReactNode => {
   return (
     <div>
       <Card >
         <h1 className={styles.pageTitle}>Gestionar Base de Datos</h1>
+      </Card>
+      <Card>
+        <h5>{'version = ' + model.version}</h5>
       </Card>
     </div>
   );
