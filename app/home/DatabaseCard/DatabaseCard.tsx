@@ -17,7 +17,7 @@ export const DatabaseCard = ({ model }: Props): ReactNode => {
         <DatabaseLogo model={model} />
         <DatabaseLabels model={model} />
       </div>
-      <Link className={styles.primaryAction} href='/manage-database'>
+      <Link className={styles.primaryAction} href={`/manage-database/?id=${model.id}`}>
         Gestionar Base de Datos
       </Link>
     </Card >

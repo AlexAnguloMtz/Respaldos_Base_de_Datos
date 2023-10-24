@@ -1,6 +1,7 @@
 import { DatabaseSchema } from "./DatabaseSchema"
 
 export type DatabaseDetails = {
+  id: string,
   dbms: string,
   version: string,
   users: Array<String>,
