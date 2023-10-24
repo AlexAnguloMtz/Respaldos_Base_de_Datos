@@ -14,6 +14,7 @@ import { DatabaseDetails, countTables } from '../models/DatabaseDetails';
 import Image from 'next/image';
 import diskette from '../../public/images/diskette.svg';
 import { Modal } from '../components/Modal/Modal';
+import success from '../../public/images/check.png';
 
 const dataService: BackupsPageDataService = new BackupsPageDataService();
 
@@ -71,7 +72,7 @@ export default function Backups(): JSX.Element {
 
   return (
     <>
-      <SuccessModal visible={notifySuccess} />
+      <SuccessModal visible={notifySuccess} onDismiss={() => setNotifySuccess(false)} />
       <PageTemplate loading={state.loading || state.creatingBackup} pageHeader='Respaldos de la Base de Datos'>
         {body()}
       </PageTemplate>
@@ -131,10 +132,19 @@ const BackupCard = ({ databaseId, model }: { databaseId: string, model: Database
   );
 }
 
-const SuccessModal = ({ visible }: { visible: boolean }): ReactNode => {
+const SuccessModal = ({ visible, onDismiss }: { visible: boolean, onDismiss: () => void }): ReactNode => {
   return (
-    <Modal visible={visible} >
-      <p>nice</p>
+    <Modal visible={visible}>
+      <div className={styles.successModalContent}>
+        <h3 className={styles.modalTitle}>
+          Respaldo creado
+        </h3>
+        <Image className={styles.successModalImage} src={success} alt={'success'} width={60} height={60} />
+        <p className={styles.successModalText}>Tu respaldo nuevo aparece ahora en la cima de la lista. Para <em>descargarlo</em>, ve al primer elemento listado y pulsa en "descargar"</p>
+        <button className={styles.successModalDismiss} onClick={onDismiss}>
+          Entendido
+        </button>
+      </div>
     </Modal>
   );
 }

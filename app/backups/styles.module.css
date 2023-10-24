@@ -65,6 +65,43 @@
   margin-top: 18px;
 }
 
+.modalTitle {
+  text-align: center;
+}
+
+.successModalContent {
+  text-align: center;
+}
+
+.successModalImage {
+  margin-top: 20px;
+}
+
+.successModalText {
+  line-height: 1.7 !important;
+  margin-top: 20px;
+}
+
+.successModalText em {
+  font-style: normal;
+  color: var(--primary);
+}
+
+.successModalDismiss {
+  margin-top: 20px;
+  background-color: var(--highlight);
+  color: var(--onHighlight);
+  width: 100%;
+  font-size: 16px;
+  padding: 16px 0;
+  border-radius: 8px;
+  transition: background-color 250ms ease;
+}
+
+.successModalDismiss:hover {
+  background-color: var(--highlightMid);
+}
+
 @media screen and (min-width: 900px) {
   .pageBody {
     display: flex;

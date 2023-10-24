@@ -4,12 +4,13 @@ import Overlay from '../Overlay';
 
 type Props = {
   visible: boolean,
+  className?: string,
   children: ReactNode
 }
 
-export const Modal = ({ visible, children }: Props): ReactNode => {
+export const Modal = ({ visible, className, children }: Props): ReactNode => {
   return (
-    <Overlay active={visible} className={styles.overlay}>
+    <Overlay active={visible} className={styles.overlay + ' ' + className}>
       <div className={visible ? styles.modalVisible : styles.modal}>
         {children}
       </div>

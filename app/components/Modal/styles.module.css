@@ -4,7 +4,7 @@
 }
 
 .modal {
-  width: min(90%, 500px);
+  width: min(90%, 600px);
   padding: 30px;
   border-radius: 8px;
   pointer-events: none;
