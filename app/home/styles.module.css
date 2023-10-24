@@ -3,9 +3,3 @@
 .pageTitle {
   font-size: 26px;
 }
-
-.pageBody {
-  height: calc(100vh - var(--navHeight));
-  padding: 16px;
-  background-color: aliceblue;
-}

@@ -10,9 +10,7 @@
 
 .value {
   flex: 1;
-  /* Prevent text from wrapping */
   overflow: hidden;
-  /* Hide the overflowing text */
   text-overflow: ellipsis;
 }
 

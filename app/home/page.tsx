@@ -2,6 +2,7 @@
 
 import Card from '../components/Card';
 import Nav from '../components/Nav';
+import PageTemplate from '../components/PageTemplate';
 import ProgressIndicator from '../components/ProgressIndicator';
 import { DatabaseDetails } from '../models/DatabaseDetails';
 import Databases from './Databases';
@@ -31,50 +32,23 @@ export default function Home(): ReactNode {
     }
   }
 
-  const body = (): ReactNode => {
-    if (state.loading) {
-      return <LoadingScreen />
-    }
-    if (state.error) {
-      return <>error bro!</>
-    }
-    if (state.data) {
-      return <PageContent databases={state.data.databases} />
-    }
-    throw new Error('Could not render body');
-  }
-
   return (
-    <div className={styles.page}>
-      <Nav />
-      {body()}
-    </div>
+    <PageTemplate loading={state.loading}>
+      <SAVETHIS databases={state.data?.databases!} />
+    </PageTemplate>
   );
+
 }
 
-const PageContent = ({ databases }: { databases: Array<DatabaseDetails> }): ReactNode => {
+
+
+const SAVETHIS = ({ databases }: { databases: Array<DatabaseDetails> }): ReactNode => {
   return (
-    <PageBody>
+    <>
       <Card >
         <h1 className={styles.pageTitle}>Mis Bases de Datos</h1>
       </Card>
       <Databases models={databases} />
-    </PageBody>
-  );
-}
-
-const LoadingScreen = (): ReactNode => {
-  return (
-    <PageBody className="centered">
-      <ProgressIndicator />
-    </PageBody>
-  );
-}
-
-const PageBody = ({ className, children }: { className?: string, children: ReactNode }): ReactNode => {
-  return (
-    <div className={`${styles.pageBody} ${className}`}>
-      {children}
-    </div>
+    </>
   );
 }

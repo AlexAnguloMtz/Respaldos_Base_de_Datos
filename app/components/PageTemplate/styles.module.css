@@ -1,0 +1,7 @@
+.pageTemplate {}
+
+.pageBody {
+  height: calc(100vh - var(--navHeight));
+  padding: 16px;
+  background-color: aliceblue;
+}
