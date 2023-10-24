@@ -4,3 +4,9 @@
   flex-direction: column;
   gap: 16px;
 }
+
+@media screen and (min-width: 750px) {
+  .databases {
+    flex-direction: row;
+  }
+}

@@ -1,13 +1,15 @@
-import { BackupsPageData } from "./BackupsPageData"
+import { DatabaseDetails } from "../models/DatabaseDetails"
 
 export type BackupsPageState = {
   loading: boolean,
+  creatingBackup: boolean,
   error?: Error,
-  data?: BackupsPageData
+  data?: DatabaseDetails
 }
 
 export const initialState = (): BackupsPageState => {
   return {
-    loading: true
+    loading: true,
+    creatingBackup: false
   }
 }

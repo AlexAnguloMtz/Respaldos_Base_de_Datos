@@ -54,3 +54,18 @@
 .action:hover .actionName {
   color: var(--onHighlight);
 }
+
+@media screen and (min-width: 700px) {
+  .pageBody {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .broadDetails {
+    flex: 1;
+  }
+
+  .actions {
+    flex: 1;
+  }
+}

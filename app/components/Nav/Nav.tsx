@@ -18,16 +18,26 @@ export const Nav = (): ReactNode => {
       <Drawer
         active={drawerActive}
         onClose={() => setDrawerActive(false)} >
-        <ul className={styles.links}>
-          <li>
-            <Link href={'/'} className={styles.link} onClick={() => setDrawerActive(false)}>
-              <HomeIcon />
-              Mis Bases de Datos
-            </Link>
-          </li>
-        </ul>
+        <Links onHome={() => setDrawerActive(false)} />
       </Drawer>
     </nav>
+  );
+}
+
+const Links = ({ onHome }: { onHome: () => void }): ReactNode => {
+  return (
+    <ul className={styles.links}>
+      <li>
+        <Link
+          href={'/'}
+          className={styles.link}
+          onClick={onHome}
+        >
+          <HomeIcon />
+          Mis Bases de Datos
+        </Link>
+      </li>
+    </ul>
   );
 }
 

@@ -2,7 +2,7 @@
   background-color: var(--surface);
   position: fixed;
   left: 0;
-  width: 70%;
+  width: min(70%, 400px);
   height: 100vh;
   transition: transform 200ms ease;
   transform: translateX(-100%);

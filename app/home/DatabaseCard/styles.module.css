@@ -1,7 +1,11 @@
+.databaseCard {
+  width: 100%;
+}
+
 .upperRow {
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 18px;
 }
 
 .primaryAction {

@@ -62,8 +62,10 @@ const Content = ({ model, onBackups }: { model: DatabaseDetails, onBackups: () =
   return (
     <div>
       <Header />
-      <BroadDetails model={model} />
-      <Actions onBackups={onBackups} />
+      <div className={styles.pageBody}>
+        <BroadDetails model={model} />
+        <Actions onBackups={onBackups} />
+      </div>
     </div>
   );
 }
@@ -84,7 +86,7 @@ const BroadDetails = ({ model }: { model: DatabaseDetails }): ReactNode => {
 
         <div>
           <h5 className={styles.key}>
-            Version
+            Versión
           </h5>
           <p className={styles.value}>
             {model.version}

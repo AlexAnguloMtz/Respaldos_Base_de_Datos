@@ -3,15 +3,16 @@
 import styles from './styles.module.css';
 import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import PageTemplate from "../components/PageTemplate";
-import { ReactNode, useEffect, useReducer } from "react";
+import { ReactNode, useEffect, useReducer, useState } from "react";
 import { reducer } from "./reducer";
 import { initialState } from "./BackupsPageState";
 import Card from "../components/Card";
 import { BackupsPageDataService } from './BackupsPageDataService';
-import { BackupsPageData } from './BackupsPageData';
 import { DatabaseBackup } from '../models/DatabaseBackup';
 import DatabaseLogo from '../components/DatabaseLogo';
-import { countTables } from '../models/DatabaseDetails';
+import { DatabaseDetails, countTables } from '../models/DatabaseDetails';
+import Image from 'next/image';
+import diskette from '../../public/images/diskette.svg';
 
 const dataService: BackupsPageDataService = new BackupsPageDataService();
 
@@ -25,6 +26,12 @@ export default function Backups(): JSX.Element {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (state.creatingBackup) {
+      createBackup();
+    }
+  }, [state.creatingBackup]);
+
   const fetchData = async (): Promise<void> => {
     try {
       dispatch({ type: 'set_data', value: await dataService.getPageData(searchParams.get('id')!) })
@@ -33,26 +40,37 @@ export default function Backups(): JSX.Element {
     }
   }
 
+  const createBackup = async (): Promise<void> => {
+    try {
+      const backups: Array<DatabaseBackup> = await dataService.createBackup(searchParams.get('id')!);
+      dispatch({ type: 'set_backups', value: backups })
+    } catch (e) {
+      dispatch({ type: 'set_error', value: e as Error });
+    }
+  }
+
   const body = (): ReactNode => {
-    if (state.loading) {
+    if (state.loading || state.creatingBackup) {
       return <></>
     }
     if (state.error) {
       return <h1>Error inesperado...</h1>
     }
     return (
-      <Content model={state.data!} />
+      <Content
+        model={state.data!}
+        onCreateBackup={() => dispatch({ type: 'set_creating_backup', value: true })} />
     );
   }
 
   return (
-    <PageTemplate loading={state.loading}>
+    <PageTemplate loading={state.loading || state.creatingBackup}>
       {body()}
     </PageTemplate>
   );
 }
 
-const Content = ({ model }: { model: BackupsPageData }): ReactNode => {
+const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBackup: () => void }): ReactNode => {
   return (
     <div>
       <Header />
@@ -72,13 +90,13 @@ const Content = ({ model }: { model: BackupsPageData }): ReactNode => {
           <p>{countTables(model)}</p>
         </div>
       </Card>
-      <button className={styles.primaryAction}>
+      <button className={styles.primaryAction} onClick={onCreateBackup}>
         Crear nuevo respaldo
       </button>
       <div className={styles.backupCards}>
         {
           model.backups!.map((each: DatabaseBackup) =>
-            <BackupCard key={each.id} model={each} />
+            <BackupCard key={each.id} databaseId={model.id} model={each} />
           )
         }
       </div>
@@ -94,13 +112,17 @@ const Header = (): ReactNode => {
   );
 }
 
-const BackupCard = ({ model }: { model: DatabaseBackup }): ReactNode => {
+const BackupCard = ({ databaseId, model }: { databaseId: string, model: DatabaseBackup }): ReactNode => {
   return (
     <Card className={styles.backupCard}>
+      <Image src={diskette} alt={'backup'} width={50} height={50} />
       <p className={styles.backupCardTopText}>{formatDate(model.creationDate)}</p>
-      <button className={styles.backupCardDownload}>
+      <a
+        href={`http://192.168.100.53:8080/databases/${databaseId}/backups/${model.id}`}
+        download={'nice.txt'}
+        className={styles.backupCardDownload}>
         Descargar respaldo
-      </button>
+      </a>
     </Card>
   );
 }

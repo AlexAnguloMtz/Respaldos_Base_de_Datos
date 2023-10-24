@@ -1,7 +1,6 @@
 .databaseDetail {
   display: flex;
   gap: 10px;
-  width: 100%;
 }
 
 .name {
@@ -9,7 +8,6 @@
 }
 
 .value {
-  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
