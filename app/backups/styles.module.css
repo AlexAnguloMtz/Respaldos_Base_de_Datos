@@ -64,3 +64,21 @@
   font-weight: 500;
   margin-top: 18px;
 }
+
+@media screen and (min-width: 900px) {
+  .pageBody {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px 0;
+  }
+
+  .detailsBox,
+  .backupCards {
+    width: 40%;
+  }
+
+  .backupCards {
+    height: 500px;
+    overflow: scroll;
+  }
+}

@@ -74,31 +74,35 @@ const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBa
   return (
     <div>
       <Header />
-      <Card className={styles.details}>
-        <DatabaseLogo model={model} />
-        <div className={styles.detailsText}>
-          <h4>Identificador</h4>
-          <p>{model.id}</p>
+      <div className={styles.pageBody}>
+        <div className={styles.detailsBox}>
+          <Card className={styles.details}>
+            <DatabaseLogo model={model} />
+            <div className={styles.detailsText}>
+              <h4>Identificador</h4>
+              <p>{model.id}</p>
 
-          <h4>Usuarios</h4>
-          <p>{model.users.length}</p>
+              <h4>Usuarios</h4>
+              <p>{model.users.length}</p>
 
-          <h4>Schemas</h4>
-          <p>{model.schemas.length}</p>
+              <h4>Schemas</h4>
+              <p>{model.schemas.length}</p>
 
-          <h4>Tablas definidas por usuarios <br />(no incluye tablas del sistema)</h4>
-          <p>{countTables(model)}</p>
+              <h4>Tablas definidas por usuarios <br />(no incluye tablas del sistema)</h4>
+              <p>{countTables(model)}</p>
+            </div>
+          </Card>
+          <button className={styles.primaryAction} onClick={onCreateBackup}>
+            Crear nuevo respaldo
+          </button>
         </div>
-      </Card>
-      <button className={styles.primaryAction} onClick={onCreateBackup}>
-        Crear nuevo respaldo
-      </button>
-      <div className={styles.backupCards}>
-        {
-          model.backups!.map((each: DatabaseBackup) =>
-            <BackupCard key={each.id} databaseId={model.id} model={each} />
-          )
-        }
+        <div className={styles.backupCards}>
+          {
+            model.backups!.map((each: DatabaseBackup) =>
+              <BackupCard key={each.id} databaseId={model.id} model={each} />
+            )
+          }
+        </div>
       </div>
     </div>
   );
@@ -128,11 +132,11 @@ const BackupCard = ({ databaseId, model }: { databaseId: string, model: Database
 }
 
 const formatDate = (date: Date): string => {
-  let year = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
-  let month = new Intl.DateTimeFormat('es', { month: 'short' }).format(date);
-  let day = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
-  let hour = new Intl.DateTimeFormat('es', { hour: '2-digit' }).format(date);
-  let minute = new Intl.DateTimeFormat('es', { minute: '2-digit' }).format(date);
-  let second = new Intl.DateTimeFormat('es', { second: '2-digit' }).format(date);
+  const year = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
+  const month = new Intl.DateTimeFormat('es', { month: 'short' }).format(date);
+  const day = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
+  const hour = new Intl.DateTimeFormat('es', { hour: '2-digit' }).format(date);
+  const minute = new Intl.DateTimeFormat('es', { minute: '2-digit' }).format(date);
+  const second = new Intl.DateTimeFormat('es', { second: '2-digit' }).format(date);
   return `${day}-${month}-${year} ${hour}:${minute}:${second}`;
 }
