@@ -59,10 +59,12 @@
   .pageBody {
     display: flex;
     justify-content: space-around;
+    align-items: center;
   }
 
   .broadDetails {
     flex: 1;
+    margin-top: 0;
   }
 
   .actions {

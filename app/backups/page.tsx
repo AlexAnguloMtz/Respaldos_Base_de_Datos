@@ -97,7 +97,7 @@ const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBa
         </div>
         <div className={styles.backupCards}>
           {
-            model.backups!.map((each: DatabaseBackup) =>
+            sort(model.backups!).map((each: DatabaseBackup) =>
               <BackupCard key={each.id} databaseId={model.id} model={each} />
             )
           }
@@ -116,7 +116,7 @@ const BackupCard = ({ databaseId, model }: { databaseId: string, model: Database
         href={`http://192.168.100.53:8080/databases/${databaseId}/backups/${model.id}`}
         download={'nice.txt'}
         className={styles.backupCardDownload}>
-        Descargar respaldo
+        Descargar archivo .sql
       </a>
     </Card>
   );
@@ -130,4 +130,8 @@ const formatDate = (date: Date): string => {
   const minute = new Intl.DateTimeFormat('es', { minute: '2-digit' }).format(date);
   const second = new Intl.DateTimeFormat('es', { second: '2-digit' }).format(date);
   return `${day}-${month}-${year} ${hour}:${minute}:${second}`;
+}
+
+const sort = (backups: Array<DatabaseBackup>): Array<DatabaseBackup> => {
+  return backups.sort((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
 }
