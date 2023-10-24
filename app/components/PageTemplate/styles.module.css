@@ -1,6 +1,10 @@
 .pageTemplate {}
 
+.outerBox {
+  padding: 14px;
+}
+
 .pageBody {
+  margin-top: 20px;
   height: calc(100vh - var(--navHeight));
-  padding: 16px;
 }

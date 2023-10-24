@@ -64,7 +64,7 @@ export default function Backups(): JSX.Element {
   }
 
   return (
-    <PageTemplate loading={state.loading || state.creatingBackup}>
+    <PageTemplate loading={state.loading || state.creatingBackup} pageHeader='Respaldos de la Base de Datos'>
       {body()}
     </PageTemplate>
   );
@@ -73,7 +73,6 @@ export default function Backups(): JSX.Element {
 const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBackup: () => void }): ReactNode => {
   return (
     <div>
-      <Header />
       <div className={styles.pageBody}>
         <div className={styles.detailsBox}>
           <Card className={styles.details}>
@@ -105,14 +104,6 @@ const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBa
         </div>
       </div>
     </div>
-  );
-}
-
-const Header = (): ReactNode => {
-  return (
-    <Card >
-      <h1 className={styles.pageTitle}>Respaldos de la Base de Datos</h1>
-    </Card>
   );
 }
 

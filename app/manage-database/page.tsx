@@ -52,7 +52,7 @@ export default function ManageDatabase(): JSX.Element {
   }
 
   return (
-    <PageTemplate loading={state.loading}>
+    <PageTemplate loading={state.loading} pageHeader='Gestionar Base de Datos'>
       {body()}
     </PageTemplate>
   );
@@ -61,20 +61,11 @@ export default function ManageDatabase(): JSX.Element {
 const Content = ({ model, onBackups }: { model: DatabaseDetails, onBackups: () => void }): ReactNode => {
   return (
     <div>
-      <Header />
       <div className={styles.pageBody}>
         <BroadDetails model={model} />
         <Actions onBackups={onBackups} />
       </div>
     </div>
-  );
-}
-
-const Header = (): ReactNode => {
-  return (
-    <Card >
-      <h1 className={styles.pageTitle}>Gestionar Base de Datos</h1>
-    </Card>
   );
 }
 

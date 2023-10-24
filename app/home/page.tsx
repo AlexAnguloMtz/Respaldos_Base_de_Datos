@@ -1,6 +1,5 @@
 'use client';
 
-import Card from '../components/Card';
 import PageTemplate from '../components/PageTemplate';
 import { DatabaseDetails } from '../models/DatabaseDetails';
 import Databases from './Databases';
@@ -8,7 +7,6 @@ import { HomeData } from './HomeData';
 import { HomeDataService } from './HomeDataService';
 import { initialHomeState } from './HomeState';
 import { homeReducer } from './home-reducer';
-import styles from './styles.module.css';
 import { ReactNode, useEffect, useReducer } from "react";
 
 const homeDataService: HomeDataService = new HomeDataService();
@@ -41,7 +39,7 @@ export default function Home(): ReactNode {
   }
 
   return (
-    <PageTemplate loading={state.loading}>
+    <PageTemplate loading={state.loading} pageHeader='Mis Bases de Datos'>
       {body()}
     </PageTemplate>
   );
@@ -50,11 +48,6 @@ export default function Home(): ReactNode {
 
 const Content = ({ databases }: { databases: Array<DatabaseDetails> }): ReactNode => {
   return (
-    <>
-      <Card >
-        <h1 className={styles.pageTitle}>Mis Bases de Datos</h1>
-      </Card>
-      <Databases models={databases} />
-    </>
+    <Databases models={databases} />
   );
 }
