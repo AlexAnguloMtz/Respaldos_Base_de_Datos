@@ -88,6 +88,9 @@ const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBa
           <Card className={styles.details}>
             <DatabaseLogo model={model} />
             <div className={styles.detailsText}>
+              <h4>Versión</h4>
+              <p>{model.version}</p>
+
               <h4>Identificador</h4>
               <p>{model.id}</p>
 
@@ -97,7 +100,7 @@ const Content = ({ model, onCreateBackup }: { model: DatabaseDetails, onCreateBa
               <h4>Schemas</h4>
               <p>{model.schemas.length}</p>
 
-              <h4>Tablas definidas por usuarios <br />(no incluye tablas del sistema)</h4>
+              <h4>Tablas definidas por usuarios</h4>
               <p>{countTables(model)}</p>
             </div>
           </Card>

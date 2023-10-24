@@ -134,8 +134,6 @@ const Actions = ({
     <section className={styles.actions}>
       <Action onClick={onBackups} imgSrc={backup} imgAlt='backup' text='Respaldos' />
       <Action onClick={onUsers} imgSrc={avatar} imgAlt='users' text='Usuarios' />
-      <Action onClick={() => { }} imgSrc={backup} imgAlt='backup' text='Respaldos' />
-      <Action onClick={() => { }} imgSrc={backup} imgAlt='backup' text='Respaldos' />
     </section>
   );
 }
