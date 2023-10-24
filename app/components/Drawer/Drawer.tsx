@@ -6,10 +6,11 @@ import xMark from '../../../public/icons/xmark.svg';
 
 type Props = {
   active: boolean,
-  onClose: () => void
+  onClose: () => void,
+  children: ReactNode
 }
 
-export const Drawer = ({ active, onClose }: Props): ReactNode => {
+export const Drawer = ({ active, onClose, children }: Props): ReactNode => {
   return (
     <Overlay
       active={active}
@@ -20,6 +21,7 @@ export const Drawer = ({ active, onClose }: Props): ReactNode => {
         <div className={styles.closeButtonContainer}>
           <CloseButton onClick={onClose} />
         </div>
+        {children}
       </div>
     </Overlay>
   );

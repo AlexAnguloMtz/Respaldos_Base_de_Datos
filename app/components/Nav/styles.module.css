@@ -6,3 +6,19 @@
   align-items: center;
   padding: 0 10px;
 }
+
+.links {
+  padding: 20px;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border: solid 2px var(--highlight);
+  color: var(--onSurfaceDark);
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 12px 0;
+}

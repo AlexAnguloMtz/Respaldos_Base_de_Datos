@@ -9,6 +9,7 @@ import { initialState } from './ManageDatabaseState';
 import { ManageDatabaseService } from './ManageDatabaseService';
 import Card from '../components/Card';
 import { DatabaseDetails } from '../models/DatabaseDetails';
+import DatabaseLogo from '../components/DatabaseLogo';
 
 const dataService: ManageDatabaseService = new ManageDatabaseService();
 
@@ -41,7 +42,7 @@ export default function ManageDatabase(): JSX.Element {
   }
 
   return (
-    <PageTemplate loading={false}>
+    <PageTemplate loading={state.loading}>
       {body()}
     </PageTemplate>
   );
@@ -50,12 +51,45 @@ export default function ManageDatabase(): JSX.Element {
 const Content = ({ model }: { model: DatabaseDetails }): ReactNode => {
   return (
     <div>
-      <Card >
-        <h1 className={styles.pageTitle}>Gestionar Base de Datos</h1>
-      </Card>
-      <Card>
-        <h5>{'version = ' + model.version}</h5>
-      </Card>
+      <Header />
+      <BroadDetails model={model} />
     </div>
+  );
+}
+
+const Header = (): ReactNode => {
+  return (
+    <Card >
+      <h1 className={styles.pageTitle}>Gestionar Base de Datos</h1>
+    </Card>
+  );
+}
+
+const BroadDetails = ({ model }: { model: DatabaseDetails }): ReactNode => {
+  return (
+    <Card className={styles.broadDetails}>
+      <DatabaseLogo model={model} />
+      <div className={styles.broadDetailsText}>
+
+        <div>
+          <h5 className={styles.key}>
+            Version
+          </h5>
+          <p className={styles.value}>
+            {model.version}
+          </p>
+        </div>
+
+        <div>
+          <h5 className={styles.key}>
+            Identificador
+          </h5>
+          <p className={styles.value}>
+            {model.id}
+          </p>
+        </div>
+
+      </div>
+    </Card>
   );
 }

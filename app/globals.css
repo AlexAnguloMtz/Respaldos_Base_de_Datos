@@ -40,6 +40,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 button {
   cursor: pointer;
   background-color: transparent;

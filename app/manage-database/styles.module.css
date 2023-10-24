@@ -3,3 +3,25 @@
 .pageTitle {
   font-size: 24px;
 }
+
+.broadDetails {
+  text-align: center;
+  margin-top: 20px;
+  gap: 16px;
+}
+
+.broadDetailsText {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.broadDetailsText .key {
+  font-size: 18px;
+}
+
+.broadDetailsText .value {
+  font-size: 16px;
+  margin-top: 12px;
+}
