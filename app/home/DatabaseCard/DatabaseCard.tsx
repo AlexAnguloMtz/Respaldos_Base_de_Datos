@@ -1,24 +1,24 @@
 import styles from './styles.module.css';
-import { Database } from '@/app/models/Database';
+import { DatabaseDetails } from '@/app/models/DatabaseDetails';
 import { ReactNode } from 'react';
 import DatabaseLogo from '@/app/components/DatabaseLogo';
 import Card from '@/app/components/Card';
-import { DatabaseDetails } from '../DatabaseDetails/DatabaseDetails';
+import DatabaseLabels from '../DatabaseLabels';
 
 type Props = {
-  model: Database
+  model: DatabaseDetails,
 }
 
 export const DatabaseCard = ({ model }: Props): ReactNode => {
   return (
-    <Card>
+    <Card className={styles.databaseCard}>
       <div className={styles.upperRow}>
         <DatabaseLogo model={model} />
-        <DatabaseDetails model={model} />
+        <DatabaseLabels model={model} />
       </div>
       <a className={styles.primaryAction}>
-        Ver Respaldos
+        Gestionar Base de Datos
       </a>
-    </Card>
+    </Card >
   );
 }

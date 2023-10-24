@@ -1,5 +1,5 @@
-import { Database } from "../models/Database"
+import { DatabaseDetails } from "../models/DatabaseDetails"
 
 export type HomeData = {
-  databases: Array<Database>
+  databases: Array<DatabaseDetails>
 }

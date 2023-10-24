@@ -3,7 +3,7 @@
 import Card from '../components/Card';
 import Nav from '../components/Nav';
 import ProgressIndicator from '../components/ProgressIndicator';
-import { Database } from '../models/Database';
+import { DatabaseDetails } from '../models/DatabaseDetails';
 import Databases from './Databases';
 import { HomeData } from './HomeData';
 import { HomeDataService } from './HomeDataService';
@@ -52,7 +52,7 @@ export default function Home(): ReactNode {
   );
 }
 
-const PageContent = ({ databases }: { databases: Array<Database> }): ReactNode => {
+const PageContent = ({ databases }: { databases: Array<DatabaseDetails> }): ReactNode => {
   return (
     <PageBody>
       <Card >

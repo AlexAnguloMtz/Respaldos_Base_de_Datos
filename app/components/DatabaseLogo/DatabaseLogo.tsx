@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { Database } from "@/app/models/Database";
+import { DatabaseDetails } from "@/app/models/DatabaseDetails";
 import Image, { StaticImageData } from "next/image";
 import postgres from '../../../public/images/postgres.png';
 import mysql from '../../../public/images/mysql.png';
@@ -7,7 +7,7 @@ import defaultLogo from '../../../public/images/postgres.png';
 import { ReactNode } from "react";
 
 type Props = {
-  model: Database,
+  model: DatabaseDetails,
   width?: number,
   height?: number,
 }
@@ -23,7 +23,7 @@ export const DatabaseLogo = ({ model, width, height }: Props): ReactNode => {
   );
 }
 
-const logo = (model: Database): StaticImageData => {
+const logo = (model: DatabaseDetails): StaticImageData => {
   if (model.dbms === 'PostgreSQL') {
     return postgres;
   }
