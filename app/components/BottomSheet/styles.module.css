@@ -1,0 +1,15 @@
+.bottomSheet {
+  background: var(--surface);
+  transform: translateY(150vh);
+  transition: transform 250ms ease;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90vh;
+}
+
+.bottomSheetVisible {
+  composes: bottomSheet;
+  transform: translateY(0);
+}

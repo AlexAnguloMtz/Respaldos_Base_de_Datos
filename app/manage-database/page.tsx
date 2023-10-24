@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './styles.module.css';
-import { ReactNode, useEffect, useReducer } from 'react';
+import { ReactNode, useEffect, useReducer, useState } from 'react';
 import PageTemplate from '../components/PageTemplate';
 import { ReadonlyURLSearchParams, useRouter, useSearchParams } from 'next/navigation'
 import { reducer } from './reducer';
@@ -14,14 +14,24 @@ import { StaticImageData } from 'next/image';
 import backup from '../../public/images/backup.svg';
 import Image from 'next/image';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import avatar from '../../public/icons/avatar.png';
+import user from '../../public/icons/user.png';
+import BottomSheet from '../components/BottomSheet';
 
 const dataService: ManageDatabaseService = new ManageDatabaseService();
+
+enum View {
+  DEFAULT,
+  USERS
+}
 
 export default function ManageDatabase(): JSX.Element {
 
   const searchParams: ReadonlyURLSearchParams = useSearchParams();
 
   const [state, dispatch] = useReducer(reducer, initialState());
+
+  const [view, setView] = useState<View>(View.DEFAULT);
 
   const router: AppRouterInstance = useRouter();
 
@@ -47,23 +57,38 @@ export default function ManageDatabase(): JSX.Element {
     return (
       <Content
         model={state.data?.database!}
-        onBackups={() => router.push(`/backups?id=${state.data?.database.id}`)} />
+        onBackups={() => router.push(`/backups?id=${state.data?.database.id}`)}
+        onUsers={() => setView(View.USERS)} />
     );
   }
 
   return (
-    <PageTemplate loading={state.loading} pageHeader='Gestionar Base de Datos'>
-      {body()}
-    </PageTemplate>
+    <>
+      <PageTemplate loading={state.loading} pageHeader='Gestionar Base de Datos'>
+        {body()}
+      </PageTemplate>
+      <UsersView
+        visible={view === View.USERS}
+        onClose={() => setView(View.DEFAULT)}
+        userNames={state.data?.database.users || []} />
+    </>
   );
 }
 
-const Content = ({ model, onBackups }: { model: DatabaseDetails, onBackups: () => void }): ReactNode => {
+const Content = ({
+  model,
+  onBackups,
+  onUsers
+}: {
+  model: DatabaseDetails,
+  onBackups: () => void,
+  onUsers: () => void
+}): ReactNode => {
   return (
     <div>
       <div className={styles.pageBody}>
         <BroadDetails model={model} />
-        <Actions onBackups={onBackups} />
+        <Actions onBackups={onBackups} onUsers={onUsers} />
       </div>
     </div>
   );
@@ -98,11 +123,17 @@ const BroadDetails = ({ model }: { model: DatabaseDetails }): ReactNode => {
   );
 }
 
-const Actions = ({ onBackups }: { onBackups: () => void }): ReactNode => {
+const Actions = ({
+  onBackups,
+  onUsers
+}: {
+  onBackups: () => void,
+  onUsers: () => void
+}): ReactNode => {
   return (
     <section className={styles.actions}>
       <Action onClick={onBackups} imgSrc={backup} imgAlt='backup' text='Respaldos' />
-      <Action onClick={() => { }} imgSrc={backup} imgAlt='backup' text='Respaldos' />
+      <Action onClick={onUsers} imgSrc={avatar} imgAlt='users' text='Usuarios' />
       <Action onClick={() => { }} imgSrc={backup} imgAlt='backup' text='Respaldos' />
       <Action onClick={() => { }} imgSrc={backup} imgAlt='backup' text='Respaldos' />
     </section>
@@ -134,5 +165,66 @@ const ActionImage = ({ src, alt }: { src: StaticImageData, alt: string }): React
       alt={alt}
       width={60}
       height={60} />
+  );
+}
+
+const UsersView = ({
+  visible,
+  onClose,
+  userNames
+}: {
+  visible: boolean,
+  onClose: () => void,
+  userNames: Array<String>
+}): ReactNode => {
+  return (
+    <GenericBottomView
+      visible={visible}
+      onClose={onClose}
+      title='Usuarios'>
+      <h3 style={{ textAlign: 'center', marginTop: '20px', fontSize: '20px' }}>Total</h3>
+      <h5 style={{ textAlign: 'center', fontSize: '18px', marginTop: '12px' }}>{userNames.length}</h5>
+      <div className={styles.usersList}>
+        {
+          userNames.map((username: String, index: number) =>
+            <Card key={index} className={styles.userTile}>
+              <Image src={user} alt='user' width={40} height={40} />
+              {username}
+            </Card>
+          )
+        }
+      </div>
+    </GenericBottomView>
+  );
+}
+
+const GenericBottomView = (
+  {
+    visible,
+    onClose,
+    title,
+    children
+  }: {
+    visible: boolean,
+    onClose: () => void,
+    title: String,
+    children: ReactNode
+  }
+): ReactNode => {
+  return (
+    <BottomSheet
+      visible={visible}>
+      <div className={styles.bottomSheetContent}>
+        <h1 className={styles.bottomSheetTitle}>{title}</h1>
+        {children}
+        <div className={styles.bottomSheetButtonContainer}>
+          <button
+            className={styles.bottomSheetDismissButton}
+            onClick={onClose}>
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </BottomSheet>
   );
 }
