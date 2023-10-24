@@ -1,0 +1,65 @@
+.pageTitle {
+  font-size: 24px;
+}
+
+.primaryAction {
+  background-color: var(--primary);
+  color: var(--onPrimary);
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 8px;
+  font-size: 18px;
+  margin-top: 14px;
+  transition: background-color 250ms ease;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+.primaryAction:hover {
+  background-color: var(--primaryDark);
+}
+
+.details {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.details h4 {
+  margin-top: 12px;
+}
+
+.details p {
+  margin-top: 6px;
+}
+
+.backupCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 0;
+}
+
+.backupCard {
+  text-align: center;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+}
+
+.backupCardDownload {
+  background-color: var(--highlight);
+  width: 100%;
+  padding: 8px 0;
+  font-size: 16px;
+  border-radius: 8px;
+  color: var(--onHighlight);
+  transition: background-color 250ms ease;
+  margin-top: 16px;
+}
+
+.backupCardDownload:hover {
+  background-color: var(--highlightMid);
+}
+
+.backupCardTopText {
+  color: var(--onSurfaceDark);
+  font-weight: 500;
+}

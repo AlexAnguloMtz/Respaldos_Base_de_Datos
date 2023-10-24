@@ -1,3 +1,4 @@
+import { DatabaseBackup } from "./DatabaseBackup";
 import { DatabaseSchema } from "./DatabaseSchema"
 
 export type DatabaseDetails = {
@@ -5,7 +6,8 @@ export type DatabaseDetails = {
   dbms: string,
   version: string,
   users: Array<String>,
-  schemas: Array<DatabaseSchema>
+  backups?: Array<DatabaseBackup>
+  schemas: Array<DatabaseSchema>,
 }
 
 export const countTables = (model: DatabaseDetails): number => {

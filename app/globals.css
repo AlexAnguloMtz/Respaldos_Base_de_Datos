@@ -6,6 +6,7 @@
 
 * {
   --primary: #ff3d00;
+  --primaryDark: #d83807;
   --onPrimary: white;
   --surface: white;
   --onSurfaceDark: rgb(78, 79, 79);
