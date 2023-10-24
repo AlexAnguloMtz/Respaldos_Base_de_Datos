@@ -1,9 +1,7 @@
 'use client';
 
 import Card from '../components/Card';
-import Nav from '../components/Nav';
 import PageTemplate from '../components/PageTemplate';
-import ProgressIndicator from '../components/ProgressIndicator';
 import { DatabaseDetails } from '../models/DatabaseDetails';
 import Databases from './Databases';
 import { HomeData } from './HomeData';
@@ -32,17 +30,22 @@ export default function Home(): ReactNode {
     }
   }
 
+  const body = (): ReactNode => {
+    if (state.error) {
+      return <h1>Error inesperado...</h1>
+    }
+    return <Content databases={state.data?.databases!} />
+  }
+
   return (
     <PageTemplate loading={state.loading}>
-      <SAVETHIS databases={state.data?.databases!} />
+      {body()}
     </PageTemplate>
   );
 
 }
 
-
-
-const SAVETHIS = ({ databases }: { databases: Array<DatabaseDetails> }): ReactNode => {
+const Content = ({ databases }: { databases: Array<DatabaseDetails> }): ReactNode => {
   return (
     <>
       <Card >
