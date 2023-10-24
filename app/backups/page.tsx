@@ -78,7 +78,7 @@ const Content = ({ model }: { model: BackupsPageData }): ReactNode => {
       <div className={styles.backupCards}>
         {
           model.backups!.map((each: DatabaseBackup) =>
-            <BackupCard model={each} />
+            <BackupCard key={each.id} model={each} />
           )
         }
       </div>
