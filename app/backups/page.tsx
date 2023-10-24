@@ -13,6 +13,7 @@ import DatabaseLogo from '../components/DatabaseLogo';
 import { DatabaseDetails, countTables } from '../models/DatabaseDetails';
 import Image from 'next/image';
 import diskette from '../../public/images/diskette.svg';
+import { Modal } from '../components/Modal/Modal';
 
 const dataService: BackupsPageDataService = new BackupsPageDataService();
 
@@ -21,6 +22,8 @@ export default function Backups(): JSX.Element {
   const searchParams: ReadonlyURLSearchParams = useSearchParams();
 
   const [state, dispatch] = useReducer(reducer, initialState());
+
+  const [notifySuccess, setNotifySuccess] = useState<boolean>(false);
 
   useEffect(() => {
     fetchData();
@@ -44,6 +47,7 @@ export default function Backups(): JSX.Element {
     try {
       const backups: Array<DatabaseBackup> = await dataService.createBackup(searchParams.get('id')!);
       dispatch({ type: 'set_backups', value: backups })
+      setNotifySuccess(true);
     } catch (e) {
       dispatch({ type: 'set_error', value: e as Error });
     }
@@ -57,16 +61,21 @@ export default function Backups(): JSX.Element {
       return <h1>Error inesperado...</h1>
     }
     return (
-      <Content
-        model={state.data!}
-        onCreateBackup={() => dispatch({ type: 'set_creating_backup', value: true })} />
+      <>
+        <Content
+          model={state.data!}
+          onCreateBackup={() => dispatch({ type: 'set_creating_backup', value: true })} />
+      </>
     );
   }
 
   return (
-    <PageTemplate loading={state.loading || state.creatingBackup} pageHeader='Respaldos de la Base de Datos'>
-      {body()}
-    </PageTemplate>
+    <>
+      <SuccessModal visible={notifySuccess} />
+      <PageTemplate loading={state.loading || state.creatingBackup} pageHeader='Respaldos de la Base de Datos'>
+        {body()}
+      </PageTemplate>
+    </>
   );
 }
 
@@ -119,6 +128,14 @@ const BackupCard = ({ databaseId, model }: { databaseId: string, model: Database
         Descargar respaldo (.sql)
       </a>
     </Card>
+  );
+}
+
+const SuccessModal = ({ visible }: { visible: boolean }): ReactNode => {
+  return (
+    <Modal visible={visible} >
+      <p>nice</p>
+    </Modal>
   );
 }
 

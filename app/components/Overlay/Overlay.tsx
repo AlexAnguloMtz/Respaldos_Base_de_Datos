@@ -3,14 +3,15 @@ import styles from './styles.module.css';
 
 type Props = {
   active: boolean,
-  onClick: () => void,
+  onClick?: () => void,
+  className?: string,
   children: ReactNode
 }
 
-export const Overlay = ({ active, onClick, children }: Props): ReactNode => {
+export const Overlay = ({ active, onClick, className, children }: Props): ReactNode => {
   return (
     <div
-      className={`${styles.overlay} ${active ? styles.active : ''}`}
+      className={`${styles.overlay} ${active ? styles.active : ''} ${className}`}
       onClick={onClick}>
       {children}
     </div>
