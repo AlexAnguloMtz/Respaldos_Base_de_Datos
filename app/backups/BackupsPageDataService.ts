@@ -6,12 +6,7 @@ export class BackupsPageDataService {
   async createBackup(databaseId: string): Promise<Array<DatabaseBackup>> {
     const response: Response = await fetch(`/api/databases/new-backup?id=${databaseId}`, { method: 'POST' });
     const data = await response.json();
-    return data.backups((each: any) => {
-      return {
-        id: each.id,
-        creationDate: new Date(each.creationTimeStamp)
-      }
-    });
+    return data.backups.map((each: any) => this.parseBackupBody(each));
   }
 
   async getPageData(id: string): Promise<DatabaseDetails> {
@@ -24,6 +19,13 @@ export class BackupsPageDataService {
       users: data.users,
       schemas: data.schemas.map((each: any) => each as DatabaseSchema),
       backups: data.backups.map((backup: any) => { return { id: backup.id, creationDate: new Date(backup.creationTimeStamp) } })
+    }
+  }
+
+  private parseBackupBody = (body: any): DatabaseBackup => {
+    return {
+      id: body.id,
+      creationDate: new Date(body.creationTimeStamp)
     }
   }
 

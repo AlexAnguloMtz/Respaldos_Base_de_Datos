@@ -116,7 +116,7 @@ const BackupCard = ({ databaseId, model }: { databaseId: string, model: Database
         href={`http://192.168.100.53:8080/databases/${databaseId}/backups/${model.id}`}
         download={'nice.txt'}
         className={styles.backupCardDownload}>
-        Descargar archivo .sql
+        Descargar respaldo (.sql)
       </a>
     </Card>
   );

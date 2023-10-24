@@ -20,6 +20,23 @@ export const reducer = (state: BackupsPageState, action: BackupsPageAction): Bac
     case 'set_creating_backup':
       return { ...state, creatingBackup: action.value };
     case 'set_backups':
-      return { ...state, creatingBackup: false, data: { ...state, backups: action.value, id: state.data?.id!, dbms: state.data?.dbms!, version: state.data?.version!, users: state.data?.users!, schemas: state.data?.schemas! } };
+      return setBackups(action.value, state);
   }
+}
+
+const setBackups = (payload: Array<DatabaseBackup>, state: BackupsPageState): BackupsPageState => {
+  const neww: BackupsPageState = {
+    ...state,
+    creatingBackup: false,
+    data: {
+      ...state,
+      backups: payload,
+      id: state.data?.id!,
+      dbms: state.data?.dbms!,
+      version: state.data?.version!,
+      users: state.data?.users!,
+      schemas: state.data?.schemas!
+    }
+  };
+  return neww;
 }
