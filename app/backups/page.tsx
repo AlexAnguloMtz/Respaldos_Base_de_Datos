@@ -126,8 +126,8 @@ const BackupCard = ({ databaseId, model }: { databaseId: string, model: Database
       <Image src={diskette} alt={'backup'} width={50} height={50} />
       <p className={styles.backupCardTopText}>{formatDate(model.creationDate)}</p>
       <a
-        href={`http://192.168.100.53:8080/databases/${databaseId}/backups/${model.id}`}
-        download={'nice.txt'}
+        href={`/api/databases/${databaseId}/backups/${model.id}`}
+        download
         className={styles.backupCardDownload}>
         Descargar respaldo (.sql)
       </a>

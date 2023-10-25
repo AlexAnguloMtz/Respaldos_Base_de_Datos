@@ -5,10 +5,11 @@ export async function GET(req: NextRequest) {
   const id = url.searchParams.get('id');
   const backups = url.searchParams.get('backups');
   if (id) {
-    const uri: string = `http://localhost:8080/databases/${id}${backups ? '?backups=true' : ''}`;
+    const uri: string = `http://${process.env.API_HOST}/databases/${id}${backups ? '?backups=true' : ''}`;
     const response: Response = await fetch(uri, { cache: 'no-cache' });
     return NextResponse.json(await response.json());
   }
-  const response: Response = await fetch('http://localhost:8080/databases', { cache: 'no-cache' });
+  const response: Response = await fetch(`http://${process.env.API_HOST}/databases`, { cache: 'no-cache' });
   return NextResponse.json(await response.json());
 }
+

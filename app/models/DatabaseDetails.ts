@@ -11,5 +11,5 @@ export type DatabaseDetails = {
 }
 
 export const countTables = (model: DatabaseDetails): number => {
-  return model.schemas.flatMap((schema) => schema.tables).length;
+  return model.schemas.flatMap((schema: DatabaseSchema) => schema.tables).length;
 }
