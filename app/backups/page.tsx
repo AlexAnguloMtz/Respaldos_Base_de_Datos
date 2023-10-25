@@ -153,12 +153,14 @@ const SuccessModal = ({ visible, onDismiss }: { visible: boolean, onDismiss: () 
 }
 
 const formatDate = (date: Date): string => {
-  const year = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
-  const month = new Intl.DateTimeFormat('es', { month: 'short' }).format(date);
-  const day = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
-  const hour = new Intl.DateTimeFormat('es', { hour: '2-digit' }).format(date);
-  const minute = new Intl.DateTimeFormat('es', { minute: '2-digit' }).format(date);
-  const second = new Intl.DateTimeFormat('es', { second: '2-digit' }).format(date);
+  const localTimezoneOffsetMinutes = new Date().getTimezoneOffset();
+  const localDate = new Date(date.getTime() - localTimezoneOffsetMinutes * 60000);
+  const year = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(localDate);
+  const month = new Intl.DateTimeFormat('es', { month: 'short' }).format(localDate);
+  const day = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(localDate);
+  const hour = new Intl.DateTimeFormat('es', { hour: '2-digit' }).format(localDate);
+  const minute = new Intl.DateTimeFormat('es', { minute: '2-digit' }).format(localDate);
+  const second = new Intl.DateTimeFormat('es', { second: '2-digit' }).format(localDate);
   return `${day}-${month}-${year} ${hour}:${minute}:${second}`;
 }
 
