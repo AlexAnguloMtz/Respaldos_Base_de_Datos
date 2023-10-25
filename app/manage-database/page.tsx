@@ -197,7 +197,7 @@ const SchemasView = ({
       imgAlt='schema'
       visible={visible}
       onClose={onClose}
-      strs={schemas.map((each: DatabaseSchema) => each.name)} />
+      strs={schemas.map((each: DatabaseSchema) => each.name + ' ' + `(${each.tables.length}) tablas`)} />
   );
 }
 
