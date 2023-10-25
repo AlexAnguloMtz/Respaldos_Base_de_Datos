@@ -8,8 +8,15 @@
 
 ![Alt Text](./screenshots/arquitectura.png)
 
+
+# Repositorio del backend
+Para ver el repositorio del backend, favor de revisar el siguiente enlace: https://github.com/AlexAnguloMtz/Respaldo_Base_de_Datos_Servidor
+
+
 # DBMS Utilizados 
+
 Los manejadores elegidos fueron PostgreSQL 15.4 y MySQL 8.0.33
+
 
 # Inicialización de datos
 
@@ -22,6 +29,7 @@ Ambos DBMS son inicializados mediante scripts en el servidor. Al momento de crea
 - Un cierto número de tablas para cada uno de estos schemas
 
 Esto fue con el fin de que al momento de descargar un respaldo, éste contenga verdaderos usuarios, schemas y tablas.
+
 
 # Secciones de la página web
 
@@ -38,6 +46,7 @@ El botón en la cima a la derecha nos muestra un menú que nos permite regresar 
 
 ![Alt Text](./screenshots/inicio.png)
 
+
 ## Dashboard del DBMS
 
 En el dashboard del DBMS tenemos tres opciones:
@@ -51,6 +60,7 @@ En el dashboard del DBMS tenemos tres opciones:
 ![Alt Text](./screenshots/usuarios.png)
 
 ![Alt Text](./screenshots/schemas.png)
+
 
 ## Respaldos 
 
