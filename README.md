@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Enlace a Página Web: https://respaldos-base-de-datos.vercel.app/
 
-## Getting Started
+# Arquitectura 
 
-First, run the development server:
+- Frontend: Web construida con NextJS + Typescript desplegada en Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Backend: REST API construida con Java + Spring Boot desplegada en Digital Ocean
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Alt Text](./screenshots/arquitectura.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# DBMS Utilizados 
+Los manejadores elegidos fueron PostgreSQL 15.4 y MySQL 8.0.33
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Inicialización de datos
 
-## Learn More
+Ambos DBMS son inicializados mediante scripts en el servidor. Al momento de creación, ambos agregan los siguientes datos de manera automática:
 
-To learn more about Next.js, take a look at the following resources:
+- Un cierto número de usuarios cuyo nombre de usuario sigue el patrón 'nombre_apellido' usando nombres mexicanos 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Un cierto número de schemas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Un cierto número de tablas para cada uno de estos schemas
 
-## Deploy on Vercel
+Esto fue con el fin de que al momento de descargar un respaldo, éste contenga verdaderos usuarios, schemas y tablas.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Secciones de la página web
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Inicio
+
+En inicio podemos ver nuestros dos DBMS y sus siguientes características:
+
+- Versión
+- Número de usuarios totales
+- Número de schemas totales
+- Número de tablas totales
+
+El botón en la cima a la derecha nos muestra un menú que nos permite regresar a Inicio
+
+![Alt Text](./screenshots/inicio.png)
+
+## Dashboard del DBMS
+
+En el dashboard del DBMS tenemos tres opciones:
+
+- Respaldos: Nos lleva a la página de respaldos
+- Usuarios: Nos muestra la lista de todos los usuarios
+- Schemas: Nos muestra la lista de todos los schemas y cuantas tablas tiene cada uno en total
+
+![Alt Text](./screenshots/dashboard.png)
+
+![Alt Text](./screenshots/usuarios.png)
+
+![Alt Text](./screenshots/schemas.png)
+
+## Respaldos 
+
+Página para crear y descargar respaldos. Contiene lo siguiente:
+
+- Detalles de nuestra base de datos, que nuevamente contiene versión, ID de la base de datos, usuarios totales, schemas totales, y tablas totales. 
+
+- Listado de todos los respaldos, en orden de más reciente a menos reciente. Los respaldos se pueden descargar dando click en "Descargar respaldo".
+
+Al crear un respaldo, sseguirá un patrón de nombre DIA - MES - AÑO  HORA.sql   (Nótese la extensión .sql)
+
+Al dar click en Crear Nuevo Respaldo, se crea un respaldo con la estampa de tiempo actual y se agrega a la lista en la posición más alta (reciente).
+
+![Alt Text](./screenshots/respaldos.png)
