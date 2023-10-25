@@ -17,12 +17,16 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import avatar from '../../public/icons/avatar.png';
 import user from '../../public/icons/user.png';
 import BottomSheet from '../components/BottomSheet';
+import { DatabaseSchema } from '../models/DatabaseSchema';
+import databaseImg from '../../public/images/database-2.png';
+import storage from '../../public/images/storage.png';
 
 const dataService: ManageDatabaseService = new ManageDatabaseService();
 
 enum View {
   DEFAULT,
-  USERS
+  USERS,
+  SCHEMAS
 }
 
 export default function ManageDatabase(): JSX.Element {
@@ -58,7 +62,8 @@ export default function ManageDatabase(): JSX.Element {
       <Content
         model={state.data?.database!}
         onBackups={() => router.push(`/backups?id=${state.data?.database.id}`)}
-        onUsers={() => setView(View.USERS)} />
+        onUsers={() => setView(View.USERS)}
+        onSchemas={() => setView(View.SCHEMAS)} />
     );
   }
 
@@ -71,6 +76,10 @@ export default function ManageDatabase(): JSX.Element {
         visible={view === View.USERS}
         onClose={() => setView(View.DEFAULT)}
         userNames={state.data?.database.users || []} />
+      <SchemasView
+        visible={view === View.SCHEMAS}
+        onClose={() => setView(View.DEFAULT)}
+        schemas={state.data?.database.schemas || []} />
     </>
   );
 }
@@ -78,17 +87,19 @@ export default function ManageDatabase(): JSX.Element {
 const Content = ({
   model,
   onBackups,
-  onUsers
+  onUsers,
+  onSchemas
 }: {
   model: DatabaseDetails,
   onBackups: () => void,
-  onUsers: () => void
+  onUsers: () => void,
+  onSchemas: () => void
 }): ReactNode => {
   return (
     <div>
       <div className={styles.pageBody}>
         <BroadDetails model={model} />
-        <Actions onBackups={onBackups} onUsers={onUsers} />
+        <Actions onBackups={onBackups} onUsers={onUsers} onSchemas={onSchemas} />
       </div>
     </div>
   );
@@ -125,15 +136,18 @@ const BroadDetails = ({ model }: { model: DatabaseDetails }): ReactNode => {
 
 const Actions = ({
   onBackups,
-  onUsers
+  onUsers,
+  onSchemas
 }: {
   onBackups: () => void,
-  onUsers: () => void
+  onUsers: () => void,
+  onSchemas: () => void
 }): ReactNode => {
   return (
     <section className={styles.actions}>
-      <Action onClick={onBackups} imgSrc={backup} imgAlt='backup' text='Respaldos' />
+      <Action onClick={onBackups} imgSrc={storage} imgAlt='backup' text='Respaldos' />
       <Action onClick={onUsers} imgSrc={avatar} imgAlt='users' text='Usuarios' />
+      <Action onClick={onSchemas} imgSrc={databaseImg} imgAlt='schemas' text='Schemas' />
     </section>
   );
 }
@@ -166,6 +180,27 @@ const ActionImage = ({ src, alt }: { src: StaticImageData, alt: string }): React
   );
 }
 
+const SchemasView = ({
+  visible,
+  onClose,
+  schemas
+}: {
+  visible: boolean,
+  onClose: () => void,
+  schemas: Array<DatabaseSchema>
+}): ReactNode => {
+  return (
+    <MultipleCardsBottomView
+      title='Schemas'
+      total={schemas.length}
+      imgSrc={databaseImg}
+      imgAlt='schema'
+      visible={visible}
+      onClose={onClose}
+      strs={schemas.map((each: DatabaseSchema) => each.name)} />
+  );
+}
+
 const UsersView = ({
   visible,
   onClose,
@@ -176,18 +211,47 @@ const UsersView = ({
   userNames: Array<String>
 }): ReactNode => {
   return (
+    <MultipleCardsBottomView
+      title='Usuarios'
+      total={userNames.length}
+      imgSrc={user}
+      imgAlt='user'
+      visible={visible}
+      onClose={onClose}
+      strs={userNames} />
+  );
+}
+
+const MultipleCardsBottomView = ({
+  title,
+  total,
+  imgSrc,
+  imgAlt,
+  visible,
+  onClose,
+  strs
+}: {
+  title: string,
+  total: number,
+  imgSrc: StaticImageData,
+  imgAlt: string,
+  visible: boolean,
+  onClose: () => void,
+  strs: Array<String>
+}): ReactNode => {
+  return (
     <GenericBottomView
       visible={visible}
       onClose={onClose}
-      title='Usuarios'>
+      title={title}>
       <h3 style={{ textAlign: 'center', marginTop: '20px', fontSize: '20px' }}>Total</h3>
-      <h5 style={{ textAlign: 'center', fontSize: '18px', marginTop: '12px' }}>{userNames.length}</h5>
-      <div className={styles.usersList}>
+      <h5 style={{ textAlign: 'center', fontSize: '18px', marginTop: '12px' }}>{total}</h5>
+      <div className={styles.list}>
         {
-          userNames.map((username: String, index: number) =>
-            <Card key={index} className={styles.userTile}>
-              <Image src={user} alt='user' width={40} height={40} />
-              {username}
+          strs.map((str: String, index: number) =>
+            <Card key={index} className={styles.tile}>
+              <Image src={imgSrc} alt={imgAlt} width={40} height={40} />
+              {str}
             </Card>
           )
         }
