@@ -143,7 +143,7 @@ const SuccessModal = ({ visible, onDismiss }: { visible: boolean, onDismiss: () 
           Respaldo creado
         </h3>
         <Image className={styles.successModalImage} src={success} alt={'success'} width={60} height={60} />
-        <p className={styles.successModalText}>Tu respaldo nuevo aparece ahora en la cima de la lista. Para <em>descargarlo</em>, ve al primer elemento listado y pulsa en &ldquo;descargar&rdquo;</p>
+        <p className={styles.successModalText}>Tu respaldo nuevo aparece ahora en la cima de la lista. Para <em>descargarlo</em> ve al primer elemento listado y pulsa en &ldquo;descargar&rdquo;</p>
         <button className={styles.successModalDismiss} onClick={onDismiss}>
           Entendido
         </button>
